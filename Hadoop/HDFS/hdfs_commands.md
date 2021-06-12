@@ -22,15 +22,16 @@ The output in the below image shows all the possible commands we can use. Ex: ls
 
 `ls` is a basic command in linux which lists all the files, directories in a folder. Breaking down the above command:
 
-1.`'hadoop fs'` - Prefix to the actual command
+1.`hadoop fs` - Prefix to the actual command
 
-2.`'-ls'` - Actual command(linux command) which specifies what action to be performed.
+2.`-ls` - Actual command(linux command) which specifies what action to be performed.
 
-3.`'/'` - Directory in HDFS. Here `\` means home folder and it is specific to `ls` command.
+3.`/` - Directory in HDFS. Here `\` means home folder and it is specific to `ls` command.
 
 *Note:* The `ls` command will access the namespace (folder structure and hierarchy) directly from the NameNode.
 
 **Output:**
+
 ![hadoop fs](./mdimages/hadoop_fs_ls_op.jpg)
 
 2.      hadoop fs -ls -t -r /
