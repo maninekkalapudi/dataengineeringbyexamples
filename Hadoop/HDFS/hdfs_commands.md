@@ -18,7 +18,7 @@ The output in the below image shows all the possible commands we can use. Ex: ls
 
 ## 2. list all the files in the HDFS directory
 
-1.      `hadoop fs -ls /`
+1.      `hadoop fs -ls <hdfs_path>`
 
 `ls` is a basic command in linux which lists all the files, directories in a folder. Breaking down the above command:
 
@@ -26,7 +26,7 @@ The output in the below image shows all the possible commands we can use. Ex: ls
 
 2.`-ls` - Actual command(linux command) which specifies what action to be performed.
 
-3.`/` - Directory in HDFS. Here `\` means home folder and it is specific to `ls` command.
+3.`<hdfs_path>` - Directory in HDFS.
 
 *Note:* The `ls` command will access the namespace (folder structure and hierarchy) directly from the NameNode.
 
@@ -34,7 +34,9 @@ The output in the below image shows all the possible commands we can use. Ex: ls
 
 ![hadoop fs](./mdimages/hdfs_commands/hadoop_fs_ls_op.jpg)
 
-2.      hadoop fs -ls -t -r /
+- Here `/` means home folder and it is specific to `ls` command.
+
+2.      hadoop fs -ls -t -r <hdfs_path>
 
 This command has extra options `-t` and `-r`.
 
@@ -48,19 +50,19 @@ Below mentioned are some options we could use with `ls` to display the results i
 
 - `-S` - displays the files/folders according to the size. Largest file first. Ex:
 
-        hadoop fs -ls -S /
+        hadoop fs -ls -S <hdfs_path>
 
 ![hadoop fs](./mdimages/hdfs_commands/hadoop_fs_ls_S_op.jpg)
 
-The column before the date column shows the size of the data in KBs. To display the size in human redable format(like MBs and GBs) we need to use `-h` option as shown below. 
+The column before the date column shows the size of the data in KBs. To display the size in human redable format(like KB, MB and GB) we need to use `-h` option as shown below.
 
-        hadoop fs -ls -S -h /
+        hadoop fs -ls -S -h <hdfs_path>
 
 ![hadoop fs](./mdimages/hdfs_commands/hadoop_fs_ls_S_h_op.jpg)
 
 - To recursively list all the files and folders in the given path we will use `-R`
 
-        hadoop fs -ls -R /
+        hadoop fs -ls -R <hdfs_path>
 
 ## 3. To search any file in a given HDFS path
 
@@ -69,6 +71,7 @@ The column before the date column shows the size of the data in KBs. To display 
 - Here we're getting the list of contents from a path in HDFS using `ls` and using pipe `|` we're passing the result to `grep` command. `grep` command will try to match the `<search_term>` in the list of files and folders it receives from `ls` command.
 
 <!--- Add examples for grep command-->
+![hadoop fs](./mdimages/hdfs_commands/hadoop_fs_grep_op.jpg)
 
 - hadoop fs mkdir <dir_path>/folder_name
 - hadoop fs mkdir -P <dir_path>/folder1/folder2
@@ -78,15 +81,21 @@ The column before the date column shows the size of the data in KBs. To display 
 - hadoop fs -rmdir <dir_path>/folder1
 
 <!--- Copying files from local to hdfs-->
-step1: hadoop fs -mkdir /data
+step1: 
 
-step2: touch <local_path>/local_file.txt
+        hadoop fs -mkdir /data
 
-step3: hadoop fs -copyFromLocal <local_path>/local_file.txt <hdfs_path>
+step2: 
 
-(OR)
+        touch <local_path>/local_file.txt
 
-hadoop fs -put <local_path>/local_file.txt <hdfs_path>
+step3: 
+
+        hadoop fs -copyFromLocal <local_path>/local_file.txt <hdfs_path>
+
+                                (OR)
+
+        hadoop fs -put <local_path>/local_file.txt <hdfs_path>
 
 <!--- Copying folders from local to hdfs-->
 case 1: hadoop fs -copyFromLocal <local_path>/local_folder /data
