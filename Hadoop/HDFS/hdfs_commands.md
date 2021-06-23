@@ -20,9 +20,9 @@ The output in the below image shows all the possible commands we can use. Ex: ls
 
 1.      `hadoop fs -ls <hdfs_path>`
 
-`ls` is a basic command in linux which lists all the files, directories in a folder. Breaking down the above command:
+`ls` is a basic command in linux which lists all the files, directories in a given path. Breaking down the above command:
 
-1.`hadoop fs` - Prefix to the actual command
+1.`hadoop fs` - Prefix to the actual command. This will let us know that it is a command for HDFS.
 
 2.`-ls` - Actual command(linux command) which specifies what action to be performed.
 
