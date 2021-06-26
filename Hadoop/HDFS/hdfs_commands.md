@@ -28,13 +28,13 @@ The output in the below image shows all the possible commands we can use. Ex: ls
 
 3.`<hdfs_path>` - Directory in HDFS.
 
-*Note:* The `ls` command will access the namespace (folder structure and hierarchy) directly from the NameNode.
+*Note:* The `ls` command will access the namespace (directory structure and hierarchy) directly from the NameNode.
 
 **Output:**
 
-![hadoop fs](./mdimages/hdfs_commands/hadoop_fs_ls_op.jpg)
+![hadoop fs -ls](./mdimages/hdfs_commands/hadoop_fs_ls_op.jpg)
 
-- Here `/` means home folder and it is specific to `ls` command.
+- Here `/` means home directory and it is specific to `ls` command.
 
 2.      hadoop fs -ls -t -r <hdfs_path>
 
@@ -48,19 +48,19 @@ Both `-t` and `-r` along with `-ls` will display the files in the specified dire
 
 Below mentioned are some options we could use with `ls` to display the results in the way we need.
 
-- `-S` - displays the files/folders according to the size. Largest file first. Ex:
+- `-S` - displays the files/directories according to the size. Largest file first. Ex:
 
         hadoop fs -ls -S <hdfs_path>
 
-![hadoop fs](./mdimages/hdfs_commands/hadoop_fs_ls_S_op.jpg)
+![hadoop fs -ls -S](./mdimages/hdfs_commands/hadoop_fs_ls_S_op.jpg)
 
 The column before the date column shows the size of the data in KBs. To display the size in human redable format(like KB, MB and GB) we need to use `-h` option as shown below.
 
         hadoop fs -ls -S -h <hdfs_path>
 
-![hadoop fs](./mdimages/hdfs_commands/hadoop_fs_ls_S_h_op.jpg)
+![hadoop fs -ls -S -h](./mdimages/hdfs_commands/hadoop_fs_ls_S_h_op.jpg)
 
-- To recursively list all the files and folders in the given path we will use `-R`
+- To recursively list all the files and directories in the given path we will use `-R`
 
         hadoop fs -ls -R <hdfs_path>
 
@@ -68,44 +68,74 @@ The column before the date column shows the size of the data in KBs. To display 
 
         hadoop fs -ls <hdfs_path> | grep <search_term>
 
-- Here we're getting the list of contents from a path in HDFS using `ls` and using pipe `|` we're passing the result to `grep` command. `grep` command will try to match the `<search_term>` in the list of files and folders it receives from `ls` command.
+- Here we're getting the list of contents from a path in HDFS using `ls` and using pipe `|` we're passing the result to `grep` command. `grep` command will try to match the `<search_term>` in the list of files and directories it receives from `ls` command.
 
-<!--- Add examples for grep command-->
-![hadoop fs](./mdimages/hdfs_commands/hadoop_fs_grep_op.jpg)
+![hadoop fs -ls <hdfs_path> | grep <search_term>](./mdimages/hdfs_commands/hadoop_fs_grep_op.jpg)
 
-- hadoop fs mkdir <dir_path>/folder_name
-- hadoop fs mkdir -P <dir_path>/folder1/folder2
+## 4. Create a directory in HDFS
 
-- hadoop fs -rm <dir_path>/folder1/file1.txt
-- hadoop fs -rm -R <dir_path>/folder1/
-- hadoop fs -rmdir <dir_path>/folder1
+        hadoop fs mkdir <dir_path>/directory_name
 
-<!--- Copying files from local to hdfs-->
-step1: 
+- `<dir_path>` should be an existing path
 
-        hadoop fs -mkdir /data
+- To create an empty directory structure at a given path, we should use `-P` option as shown below:
 
-step2: 
+        hadoop fs mkdir -P <dir_path>/directory1/directory2
 
-        touch <local_path>/local_file.txt
+- Here, both `directory1` and `directory2` are newly created as mentioned in the above command
 
-step3: 
+## 5. Remove a file, empty directory and a non-empty directory in HDFS
 
-        hadoop fs -copyFromLocal <local_path>/local_file.txt <hdfs_path>
+- To remove a file from an HDFS path, we can use `-rm` command
+
+        hadoop fs -rm <dir_path>/<file_name>
+
+- To recursively remove the files in an HDFS directory, `-R` option should be passed along with `rm`
+
+        hadoop fs -rm -R <dir_path>/directory1/
+
+- To remove a directory along with its content, we can use `-rmdir` command as below
+
+        hadoop fs -rmdir <dir_path>/directory1
+
+## 6. Copying files from local machine to HDFS
+
+step1: Create a file in local machine. We can also use the files the are already in the local machine.
+
+        touch <local_path>/<local_file_name> 
+
+step2: Create a directory in HDFS path
+
+        hadoop fs -mkdir <hdfs_path>/<dir_name>
+
+step3: Use `-copyFromLocal` or `-put` command to copy the file from local machine to HDFS
+
+        hadoop fs -copyFromLocal <local_path>/<local_file_name> <hdfs_path>
 
                                 (OR)
 
-        hadoop fs -put <local_path>/local_file.txt <hdfs_path>
+        hadoop fs -put <local_path>/<local_file_name> <hdfs_path>
 
-<!--- Copying folders from local to hdfs-->
-case 1: hadoop fs -copyFromLocal <local_path>/local_folder /data
+- Copying directories from local machine to HDFS
 
-case 1: hadoop fs -copyFromLocal <local_path>/local_folder /data/folder1
+case 1:
 
-<!--- Copying folders from hdfs to local-->
-hadoop fs -copyToLocal <hdfs_path> <local_path>
-(OR)
-hadoop fs -get <hdfs_path> <local_path>
+        hadoop fs -copyFromLocal <local_path>/local_directory <hdfs_path>
+
+case 2:
+
+        hadoop fs -copyFromLocal <local_path>/local_directory <hdfs_path>/directory1
+
+## 7. Copying directories from hdfs to local
+
+- To copy data from HDFS to local machine, we can use `-copyToLocal` or `-get` commands
+
+        hadoop fs -copyToLocal <hdfs_path> <local_path>
+
+                                (OR)
+
+        hadoop fs -get <hdfs_path> <local_path>
+
 
 <!--- To view first few lines of a file-->
 hadoop fs -tail <hdfs_file_path>
