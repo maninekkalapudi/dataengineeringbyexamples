@@ -10,8 +10,6 @@ Here, I'm using [ITVersity](https://labs.itversity.com/) for all the practicals.
 
         hadoop fs
 
-**Output:**
-
 The output in the below image shows all the possible commands we can use. Ex: ls, mkdir, rm, rmdir and etc.
 
 ![hadoop fs](./mdimages/hdfs_commands/hadoop_fs_op.jpg)
@@ -22,11 +20,11 @@ The output in the below image shows all the possible commands we can use. Ex: ls
 
 `ls` is a basic command in linux which lists all the files, directories in a given path. Breaking down the above command:
 
-1.`hadoop fs` - Prefix to the actual command. This will let us know that it is a command for HDFS.
+1. `hadoop fs` - Prefix to the actual command. This will let us know that it is a command for HDFS.
 
-2.`-ls` - Actual command(linux command) which specifies what action to be performed.
+2. `-ls` - Actual command(linux command) which specifies what action to be performed.
 
-3.`<hdfs_path>` - Directory in HDFS.
+3. `<hdfs_path>` - Directory in HDFS.
 
 *Note:* The `ls` command will access the namespace (directory structure and hierarchy) directly from the NameNode.
 
@@ -34,7 +32,7 @@ The output in the below image shows all the possible commands we can use. Ex: ls
 
 ![hadoop fs -ls](./mdimages/hdfs_commands/hadoop_fs_ls_op.jpg)
 
-- Here `/` means home directory and it is specific to `ls` command.
+- Here `/` means home directory and `ls` command lists all the files in the home directory.
 
 2.      hadoop fs -ls -t -r <hdfs_path>
 
@@ -48,21 +46,23 @@ Both `-t` and `-r` along with `-ls` will display the files in the specified dire
 
 Below mentioned are some options we could use with `ls` to display the results in the way we need.
 
-- `-S` - displays the files/directories according to the size. Largest file first. Ex:
+- `-S` option displays the files/directories according to the size. Largest file first
 
-        hadoop fs -ls -S <hdfs_path>
+3.        hadoop fs -ls -S <hdfs_path>
 
 ![hadoop fs -ls -S](./mdimages/hdfs_commands/hadoop_fs_ls_S_op.jpg)
 
-The column before the date column shows the size of the data in KBs. To display the size in human redable format(like KB, MB and GB) we need to use `-h` option as shown below.
+The column before the date column shows the size of the data in KBs. 
 
-        hadoop fs -ls -S -h <hdfs_path>
+4.        hadoop fs -ls -S -h <hdfs_path>
+
+`-h` option is used to display the size in human redable format(like KB, MB and GB)
 
 ![hadoop fs -ls -S -h](./mdimages/hdfs_commands/hadoop_fs_ls_S_h_op.jpg)
 
-- To recursively list all the files and directories in the given path we will use `-R`
+5.        hadoop fs -ls -R <hdfs_path>
 
-        hadoop fs -ls -R <hdfs_path>
+`-R` option is used to recursively list all the files and directories in the given path we will use
 
 ## 3. To search any file in a given HDFS path
 
