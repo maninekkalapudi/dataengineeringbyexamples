@@ -136,26 +136,49 @@ case 2:
 
         hadoop fs -get <hdfs_path> <local_path>
 
+## 8. To view contents of a file-->
 
-<!--- To view first few lines of a file-->
-hadoop fs -tail <hdfs_file_path>
-hadoop fs -cat <hdfs_file_path> | more
+- `-tail` command will give the last few lines of a file.
 
-<!--- Copy files from one location to other-->
-hadoop fs -cp <hdfs_path_source> <hdfs_path_destination>
+        hadoop fs -tail <hdfs_file_path>
 
-<!--- Move files from one location to other-->
-hadoop fs -mv <hdfs_path_source> <hdfs_path_destination>
+- `-cat` will give all the contents of the file.
 
-<!--- Check disk space -->
-hadoop fs -df -h <hdfs_path> -> free disk space
+        hadoop fs -cat <hdfs_file_path> | more
 
-hadoop fs -du -h <hdfs_path> -> disk space in use
+- In the above command we are outputting the result of `-cat` command to `more` command using `|`. The `more` command will show first few lines of the file and rest of the file contents will be shown by pressing `return/enter` key.
 
-hadoop fs -du -S -h <hdfs_path> -> summarize disk space
+## 9. Copy and Move files from one location to other in HDFS
+
+- `-cp` command will be used to copy the files from one HDFS location to another.
+
+        hadoop fs -cp <hdfs_path_source> <hdfs_path_destination>
+
+*Note:* When we use the `-cp` command to copy the files, the data will be moved from one datanode to perform the copy operation. The NameNode will update the metadata for the files in the `<hdfs_path_destination>` location.
+
+- `-mv` command will be used to move files from one location to another
+
+        hadoop fs -mv <hdfs_path_source> <hdfs_path_destination>
+
+*Note:* When we use the `-mv` command to move the files from `<hdfs_path_source>` to `<hdfs_path_destination>`, only the metadata in the NameNode will be updated for the files or directories. No data is moved between the data nodes
+
+## 10. Check disk space of the HDFS cluster
+
+- `-df` command will give the free space available in the cluster
+
+        hadoop fs -df -h <hdfs_path>
+
+- `-du` command will give the used space in the cluster
+
+        hadoop fs -du -h <hdfs_path>
+
+- `-du -s` command summarizes the data data used by all the files in the path
+
+        hadoop fs -du -s -h <hdfs_path>
 
 <!--- Change Replication factor -->
-hadoop fs -Ddfs.replication=5 -put <local_path>/file1.csv <hdfs_path>
+
+hadoop fs -Ddfs.replication=5 -put <local_path>/<file_name> <hdfs_path>
 
 <!--- Get metadata in HDFS-->
 
