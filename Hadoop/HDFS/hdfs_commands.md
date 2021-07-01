@@ -2,9 +2,9 @@
 
 A typical Hadoop cluster is nothing but a group of linux machines and interacting with the cluster is very similar to that of a linux machine. In case if you don't have any idea about linux commands follow the explainer below every command.
 
-This is part of my [blog post](https://duckduckgo.com) on Hadoop Distributed FileSystem or HDFS where I've explained about the internals. Now we'll understand about it through commands. To simplify each linux command like ls, mkdir, rm, rmdir and etc. will be prefixed with `hadoop fs` or `hdfs dfs`
+This is part of my [blog post](https://duckduckgo.com) on Hadoop Distributed FileSystem or HDFS where I've explained about its internals. Now we'll understand about it through commands. To simplify each linux command like ls, mkdir, rm, rmdir and etc. will be prefixed with `hadoop fs` or `hdfs dfs`
 
-Here, I'm using [ITVersity](https://labs.itversity.com/) for all the practicals.
+Here, I'm using [ITVersity](https://labs.itversity.com/) for the Hadoop cluster. Lets dive in!
 
 ## 1. Lists all the HDFS commands
 
@@ -16,15 +16,15 @@ The output in the below image shows all the possible commands we can use. Ex: ls
 
 ## 2. list all the files in the HDFS directory
 
-1.      `hadoop fs -ls <hdfs_path>`
+1.      hadoop fs -ls <hdfs_path>
 
 `ls` is a basic command in linux which lists all the files, directories in a given path. Breaking down the above command:
 
-1. `hadoop fs` - Prefix to the actual command. This will let us know that it is a command for HDFS.
+- `hadoop fs` - Prefix to the actual command. This will let us know that it is a command for HDFS cluster and not the linux machine.
 
-2. `-ls` - Actual command(linux command) which specifies what action to be performed.
+- `-ls` - Actual command(linux command) which specifies what action to be performed.
 
-3. `<hdfs_path>` - Directory in HDFS.
+- `<hdfs_path>` - Directory in HDFS.
 
 *Note:* The `ls` command will access the namespace (directory structure and hierarchy) directly from the NameNode.
 
@@ -46,19 +46,19 @@ Both `-t` and `-r` along with `-ls` will display the files in the specified dire
 
 Below mentioned are some options we could use with `ls` to display the results in the way we need.
 
-- `-S` option displays the files/directories according to the size. Largest file first
-
 3.        hadoop fs -ls -S <hdfs_path>
 
 ![hadoop fs -ls -S](./mdimages/hdfs_commands/hadoop_fs_ls_S_op.jpg)
 
-The column before the date column shows the size of the data in KBs.
+- `-S` option displays the files/directories according to the size. Largest file first
+
+- The column before the date column shows the size of the data in KBs.
 
 4.        hadoop fs -ls -S -h <hdfs_path>
 
-`-h` option is used to display the size in human redable format(like KB, MB and GB)
-
 ![hadoop fs -ls -S -h](./mdimages/hdfs_commands/hadoop_fs_ls_S_h_op.jpg)
+
+`-h` option is used to display the size in human redable format(like KB, MB and GB etc.)
 
 5.        hadoop fs -ls -R <hdfs_path>
 
@@ -68,35 +68,35 @@ The column before the date column shows the size of the data in KBs.
 
         hadoop fs -ls <hdfs_path> | grep <search_term>
 
-- Here we're getting the list of contents from a path in HDFS using `ls` and using pipe `|` we're passing the result to `grep` command. `grep` command will try to match the `<search_term>` in the list of files and directories it receives from `ls` command.
+- Here we're getting the list of contents from a path in HDFS using `ls` and using `|` (pipe) we're passing the result to `grep` command. `grep` command will try to match the `<search_term>` in the list of files and directories it receives from `ls` command.
 
 ![hadoop fs -ls <hdfs_path> | grep <search_term>](./mdimages/hdfs_commands/hadoop_fs_grep_op.jpg)
 
 ## 4. Create a directory in HDFS
 
-        hadoop fs mkdir <dir_path>/<directory_name>
+1.        hadoop fs mkdir <hdfs_path>/<directory_name>
 
-*Note:* `<dir_path>` should be an existing path
+*Note:* `<hdfs_path>` should be an existing path
 
-![hadoop fs -mkdir <dir_path>/<directory_name>](./mdimages/hdfs_commands/hadoop_fs_mkdir_op.jpg)
+![hadoop fs -mkdir <hdfs_path>/<directory_name>](./mdimages/hdfs_commands/hadoop_fs_mkdir_op.jpg)
 
 - if `directory1` is not present in HDFS we'll get the following error for `-mkdir` command
 
-![hadoop fs mkdir <dir_path>/<directory_name>](./mdimages/hdfs_commands/hadoop_fs_mkdir_err_op.jpg)
+![hadoop fs mkdir <hdfs_path>/<directory_name>](./mdimages/hdfs_commands/hadoop_fs_mkdir_err_op.jpg)
 
-- To create an empty directory structure at a given path, we should use `-p` option as shown below:
+2.        hadoop fs mkdir -p <hdfs_path>/directory1/directory2
 
-        hadoop fs mkdir -p <dir_path>/directory1/directory2
+- `-p` option is used to create an empty directory structure at a given path
 
 - Here, both `directory1` and `directory2` are newly created as mentioned in the above command
 
-![hadoop fs -mkdir <dir_path>/directory1/directory2](./mdimages/hdfs_commands/hadoop_fs_mkdir_p_op.jpg)
+![hadoop fs -mkdir <hdfs_path>/directory1/directory2](./mdimages/hdfs_commands/hadoop_fs_mkdir_p_op.jpg)
 
 ## 5. Remove a file, empty directory and a non-empty directory in HDFS
 
-- To remove a file from an HDFS path, we can use `-rm` command
+1.        hadoop fs -rm <dir_path>/<file_name>
 
-        hadoop fs -rm <dir_path>/<file_name>
+- `-rm` command is used to remove a file from an HDFS path
 
 ![hadoop fs -rm <dir_path>/<file_name>](./mdimages/hdfs_commands/hadoop_fs_rm_op.jpg)
 
@@ -104,19 +104,20 @@ The column before the date column shows the size of the data in KBs.
 
 Hadoop admin can set the behaviour for deleting files/directories. When we delete some data from the HDFS cluster either it is removed permanently or move the data to trash folder (`.Trash` folder in the above example).
 
-- To recursively remove the files in an HDFS directory, `-R` option should be passed along with `rm`
 
-        hadoop fs -rm -R <dir_path>/directory1/
+2.        hadoop fs -rm -R <dir_path>/directory1/
 
-- To remove an empty directory we can use `-rmdir` command as below
+- `-R` option is used along with `-rm` command to recursively remove the files in an HDFS directory
 
-        hadoop fs -rmdir <dir_path>/directory1
+3.        hadoop fs -rmdir <dir_path>/directory1
+
+- `-rmdir` command is used to remove an empty directory
 
 ![hadoop fs -rmdir <dir_path>/directory1](./mdimages/hdfs_commands/hadoop_fs_rmdir_op.jpg)
 
-- To remove a directory along with its contents we can use `-rm -r -f` command
-
         hadoop fs -rm -r -f <dir_path>/directory1
+
+- `-rm` command along with `-r`, `-f` oprions is used to remove a directory along with its contents
 
 ![hadoop fs -rm -r -f <dir_path>/directory1](./mdimages/hdfs_commands/hadoop_fs_rm_r_f_op.jpg)
 
@@ -152,13 +153,15 @@ case 1:
 
         hadoop fs -copyFromLocal <local_path>/local_directory <hdfs_path>
 
+- The `local_directory` will be copied to `<hdfs_path>`
+
 case 2:
 
         hadoop fs -copyFromLocal <local_path>/local_directory <hdfs_path>/directory1
 
-## 7. Copying Directories From HDFS to Local
+- The `local_directory` will be copied to `directory1` under the `<hdfs_path>`
 
-- To copy data from HDFS to local machine, we can use `-copyToLocal` or `-get` commands
+## 7. Copying Directories From HDFS to Local
 
         hadoop fs -copyToLocal <hdfs_path> <local_path>
 
@@ -166,31 +169,33 @@ case 2:
 
         hadoop fs -get <hdfs_path> <local_path>
 
+- `-copyToLocal`command or `-get` command is used to copy data from HDFS to local machine
+
 ## 8. To view contents of a file-->
+
+1.        hadoop fs -tail <hdfs_file_path>
 
 - `-tail` command will give the last few lines of a file.
 
-        hadoop fs -tail <hdfs_file_path>
+2.        hadoop fs -cat <hdfs_file_path> | more
 
 - `-cat` will give all the contents of the file.
 
-        hadoop fs -cat <hdfs_file_path> | more
-
-- In the above command we are outputting the result of `-cat` command to `more` command using `|`. The `more` command will show first few lines of the file and rest of the file contents will be shown by pressing `return/enter` key.
+- In the above command we are outputting the result of `-cat` command to `more` command using `|` (pipe). The `more` command will show first few lines of the file and rest of the file contents will be shown by pressing `return/enter` key.
 
 ## 9. Copy and Move Files From One HDFS Location To Other
 
-- `-cp` command will be used to copy the files from one HDFS location to another.
+1.        hadoop fs -cp <hdfs_path_source> <hdfs_path_destination>
 
-        hadoop fs -cp <hdfs_path_source> <hdfs_path_destination>
+- `-cp` command will be used to copy the files from one HDFS location to another.
 
 ![ hadoop fs -cp <hdfs_path_source> <hdfs_path_destination>](./mdimages/hdfs_commands/hadoop_fs_cp_op.jpg)
 
 *Note:* When we use the `-cp` command to copy the files, the data will be moved from one datanode to perform the copy operation. The NameNode will update the metadata for the files in the `<hdfs_path_destination>` location.
 
-- `-mv` command will be used to move files from one location to another
+2.        hadoop fs -mv <hdfs_path_source> <hdfs_path_destination>
 
-        hadoop fs -mv <hdfs_path_source> <hdfs_path_destination>
+- `-mv` command will be used to move files from one location to another
 
 ![ hadoop fs -mv <hdfs_path_source> <hdfs_path_destination>](./mdimages/hdfs_commands/hadoop_fs_mv_op.jpg)
 
@@ -198,21 +203,21 @@ case 2:
 
 ## 10. Check Disk Space Of The HDFS Cluster
 
-- `-df` command will give the free space available in the cluster
+1.        hadoop fs -df -h <hdfs_path>
 
-        hadoop fs -df -h <hdfs_path>
+- `-df` command will give the free space available in the cluster
 
 ![ hadoop fs -df -h <hdfs_path>](./mdimages/hdfs_commands/hadoop_fs_df_h_op.jpg)
 
-- `-du` command will give the used space in the cluster
+2.        hadoop fs -du -h <hdfs_path>
 
-        hadoop fs -du -h <hdfs_path>
+- `-du` command will give the used space in the cluster
 
 ![ hadoop fs -du -h <hdfs_path>](./mdimages/hdfs_commands/hadoop_fs_du_h_op.jpg)
 
-- `-du -s` command summarizes the data data used by all the files in the path
+3.        hadoop fs -du -s -h <hdfs_path>
 
-        hadoop fs -du -s -h <hdfs_path>
+- `-du -s` command summarizes the data data used by all the files in the path
 
 ![ hadoop fs -du -s -h <hdfs_path>](./mdimages/hdfs_commands/hadoop_fs_du_s_h_op.jpg)
 
@@ -223,12 +228,12 @@ case 2:
 
 ![ hadoop fs -Ddfs.replication=5 -put <local_path>/<file_name> <hdfs_path>](./mdimages/hdfs_commands/hadoop_fs_copyfromlocal_replication_op.jpg)
 
-- `-D` represents that the command is altering the properties of the cluster
+- `-D` represents that the command is altering the properties of the HDFS cluster
 
 - In the above command, we are changing the replication factor for the individual file using `-Ddfs.replication=5`. The replication factor for each file will be shown in the second column of `ls` command's output.
 
 ## 12. Get Metadata in HDFS
 
-- `hdfs fsck` command runs the filesystem check for the given path and reports the health of the data
-
         hdfs fsck <hdfs_path> -files -blocks -locations
+
+- `hdfs fsck` command runs the filesystem check for the given path and reports the health of the data
