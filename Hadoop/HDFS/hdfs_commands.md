@@ -36,8 +36,6 @@ The output in the below image shows all the possible commands we can use. Ex: ls
 
 2.      hadoop fs -ls -t -r <hdfs_path>
 
-This command has extra options `-t` and `-r`.
-
 - `-t` - displays the results based on modified time. Files will be displayed with increasing order of their last modified time
 
 - `-r` - displays the data in reverse order.
@@ -74,7 +72,9 @@ Below mentioned are some options we could use with `ls` to display the results i
 
 ## 4. Create a directory in HDFS
 
-1.        hadoop fs mkdir <hdfs_path>/<directory_name>
+1.        hadoop fs -mkdir <hdfs_path>/<directory_name>
+
+- `-mkdir` command creates a new directory with the given name
 
 *Note:* `<hdfs_path>` should be an existing path
 
@@ -82,9 +82,9 @@ Below mentioned are some options we could use with `ls` to display the results i
 
 - if `directory1` is not present in HDFS we'll get the following error for `-mkdir` command
 
-![hadoop fs mkdir <hdfs_path>/<directory_name>](./mdimages/hdfs_commands/hadoop_fs_mkdir_err_op.jpg)
+![hadoop fs -mkdir <hdfs_path>/<directory_name>](./mdimages/hdfs_commands/hadoop_fs_mkdir_err_op.jpg)
 
-2.        hadoop fs mkdir -p <hdfs_path>/directory1/directory2
+2.        hadoop fs -mkdir -p <hdfs_path>/directory1/directory2
 
 - `-p` option is used to create an empty directory structure at a given path
 
