@@ -2,7 +2,7 @@
 
 A typical Hadoop cluster is nothing but a group of linux machines and interacting with the cluster is very similar to that of a linux machine. In case if you don't have any idea about linux commands follow the explainer below every command.
 
-This is part of my [blog post](https://duckduckgo.com) on Hadoop Distributed FileSystem or HDFS where I've explained about its internals. Now we'll understand about it through commands. To simplify each linux command like ls, mkdir, rm, rmdir and etc. will be prefixed with `hadoop fs` or `hdfs dfs`
+This is part of my [blog post](https://maninekkalapudi.com/hdfs-hadoop-distributed-filesystem) on Hadoop Distributed FileSystem or HDFS where I've explained about its internals. Now we'll understand about it through commands. To simplify each linux command like ls, mkdir, rm, rmdir and etc. will be prefixed with `hadoop fs` or `hdfs dfs`
 
 Here, I'm using [ITVersity](https://labs.itversity.com/) for the Hadoop cluster. Lets dive in!
 
