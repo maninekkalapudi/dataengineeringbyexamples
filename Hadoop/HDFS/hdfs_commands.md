@@ -104,7 +104,6 @@ Below mentioned are some options we could use with `ls` to display the results i
 
 Hadoop admin can set the behaviour for deleting files/directories. When we delete some data from the HDFS cluster either it is removed permanently or move the data to trash folder (`.Trash` folder in the above example).
 
-
 2.        hadoop fs -rm -R <dir_path>/directory1/
 
 - `-R` option is used along with `-rm` command to recursively remove the files in an HDFS directory
@@ -171,7 +170,7 @@ case 2:
 
 - `-copyToLocal`command or `-get` command is used to copy data from HDFS to local machine
 
-## 8. To view contents of a file-->
+## 8. To view contents of a file
 
 1.        hadoop fs -tail <hdfs_file_path>
 
@@ -215,12 +214,15 @@ case 2:
 
 ![ hadoop fs -du -h <hdfs_path>](./mdimages/hdfs_commands/hadoop_fs_du_h_op.jpg)
 
+- The first column shows the actual size (raw size) of the files that users have placed in the various HDFS directories.
+
+- The second column shows the actual space consumed by those files in HDFS.
+
 3.        hadoop fs -du -s -h <hdfs_path>
 
 - `-du -s` command summarizes the data data used by all the files in the path
 
 ![ hadoop fs -du -s -h <hdfs_path>](./mdimages/hdfs_commands/hadoop_fs_du_s_h_op.jpg)
-
 
 ## 11. Change Replication Factor For a File
 
@@ -237,3 +239,7 @@ case 2:
         hdfs fsck <hdfs_path> -files -blocks -locations
 
 - `hdfs fsck` command runs the filesystem check for the given path and reports the health of the data
+
+## Sources
+
+1. [hadoop disk space commands](https://www.informit.com/articles/article.aspx?p=2755708&seqNum=4)
