@@ -114,7 +114,7 @@ Hadoop admin can set the behaviour for deleting files/directories. When we delet
 
 ![hadoop fs -rmdir <dir_path>/directory1](./mdimages/hdfs_commands/hadoop_fs_rmdir_op.jpg)
 
-        hadoop fs -rm -r -f <dir_path>/directory1
+4.        hadoop fs -rm -r -f <dir_path>/directory1
 
 - `-rm` command along with `-r`, `-f` oprions is used to remove a directory along with its contents
 
