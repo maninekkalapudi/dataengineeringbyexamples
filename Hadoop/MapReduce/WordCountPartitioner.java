@@ -8,13 +8,16 @@ public class WordCountPartitioner extends Partitioner < Text, IntWritable> {
   @Override
   public int getPartition(Text key, IntWritable value, int numReduceTasks)
   {
+   //   Converting the Key to Java String format
      String str = key.toString();
-         
+         // Check if the numReduceTasks from Driver class is set to any value other than 0
          if(numReduceTasks == 0)
          {
+            // if not set then numReduceTasks=0
             return 0;
          }
-         
+         // Here we will check each word for the starting letter and assign it to a partitioner
+         // This forms the base logic for Partitioner
          else if(str.charAt(0) == 'a' || str.charAt(0)=='A')
          {
         	 return 1 % numReduceTasks;
