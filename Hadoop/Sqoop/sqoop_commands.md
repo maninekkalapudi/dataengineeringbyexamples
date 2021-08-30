@@ -26,7 +26,7 @@ Sqoop offers commands to import, export, eval and other commands to connect to a
 
 ![sqoop-list-tables](./sqoopoutput/sqoop_list_all_tables.png)
 
-### **c. eval- run an adhoc queries to check the output from the table**
+### **c. eval- run an adhoc query to check the output from the table**
 
     sqoop-eval --connect jdbc:mysql://<db-hostname>:<db-port> --username retail_dba --password cloudera --query "<sql-query>"
 
