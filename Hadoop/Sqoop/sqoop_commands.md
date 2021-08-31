@@ -6,7 +6,7 @@ Sqoop offers commands to import, export, eval and other commands to connect to a
 
 ### **a. list all databases**
 
-    sqoop-list-databases --connect jdbc:mysql://<db-hostname>:<db-port> --username retail_dba --password cloudera
+    sqoop-list-databases --connect jdbc:mysql://<db-hostname>:<db-port> --username <username> --password <password>
 
     sqoop-list-databases --connect jdbc:mysql://quickstart.cloudera:3306 --username retail_dba --password cloudera
 
@@ -18,7 +18,7 @@ Sqoop offers commands to import, export, eval and other commands to connect to a
 
 ### **b. list all tables in a database**
 
-    sqoop-list-tables --connect jdbc:mysql://<db-hostname>:<db-port>/<db-name> --username retail_dba --password cloudera
+    sqoop-list-tables --connect jdbc:mysql://<db-hostname>:<db-port>/<db-name> --username <username> --password <password>
 
     sqoop-list-tables --connect jdbc:mysql://quickstart.cloudera:3306/retail_db --username retail_dba --password cloudera
 
@@ -28,11 +28,10 @@ Sqoop offers commands to import, export, eval and other commands to connect to a
 
 ### **c. eval- run an adhoc query to check the output from the table**
 
-    sqoop-eval --connect jdbc:mysql://<db-hostname>:<db-port> --username retail_dba --password cloudera --query "<sql-query>"
+    sqoop-eval --connect jdbc:mysql://<db-hostname>:<db-port> --username <username> --password <password> --query "<sql-query>"
 
     sqoop-eval --connect jdbc:mysql://quickstart.cloudera:3306 --username retail_dba --password cloudera --query "select * from retail_db.customers limit 10"
 
 ### **Output**
 
 ![sqoop-eval](./sqoopoutput/sqoop_eval.png)
-
