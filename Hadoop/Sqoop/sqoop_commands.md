@@ -1,10 +1,10 @@
 # **Sqoop Commands**
 
-Sqoop offers commands to import, export, eval and other commands to connect to any database (MySQL) and transfer data to and from HDFS and the database.
+Sqoop offers commands to import, export, eval and other commands to connect to any database (MySQL) and transfer data to and from HDFS and the database. The following examples are demonstrated on Cloudera quickstart VM 5.13 on a Windows machine.
 
 ## **1. Accessing MySQL databases using Sqoop**
-
-### **a. list all databases**
+---------------------------------------------------
+### **a. List all databases**
 
     sqoop-list-databases --connect jdbc:mysql://<db-hostname>:<db-port> --username <username> --password <password>
 
@@ -16,7 +16,7 @@ Sqoop offers commands to import, export, eval and other commands to connect to a
 
 **Note:** In the blog post, the databases which are meant to be used internally by different tools like Hive (metastore) and etc. are listed and those are ignored by Sqoop and others are displayed.
 
-### **b. list all tables in a database**
+### **b. List all tables in a database**
 
     sqoop-list-tables --connect jdbc:mysql://<db-hostname>:<db-port>/<db-name> --username <username> --password <password>
 
@@ -26,7 +26,7 @@ Sqoop offers commands to import, export, eval and other commands to connect to a
 
 ![sqoop-list-tables](./sqoopoutput/sqoop_list_all_tables.png)
 
-### **c. eval- run an adhoc query to check the output from the table**
+### **c. Eval- run an adhoc query to check the output from the table**
 
     sqoop-eval --connect jdbc:mysql://<db-hostname>:<db-port> --username <username> --password <password> --query "<sql-query>"
 
@@ -35,3 +35,7 @@ Sqoop offers commands to import, export, eval and other commands to connect to a
 ### **Output**
 
 ![sqoop-eval](./sqoopoutput/sqoop_eval.png)
+
+## **2. Sqoop Import Commands**
+---------------------------------------------------
+
